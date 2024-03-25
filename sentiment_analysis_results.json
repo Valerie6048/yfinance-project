@@ -1,0 +1,50 @@
+[
+    {
+        "news title": "This \"Magnificent Seven\" Stock Could Be the Best Artificial Intelligence (AI) Bet Right Now (and It's Not Nvidia).",
+        "news url": "https://finance.yahoo.com/m/5dad7a4a-30a4-34fb-9e75-0d8556116ca3/this-%22magnificent-seven%22.html",
+        "skor_sentiment": 0.3073444264069264,
+        "label_sentiment": "Positif"
+    },
+    {
+        "news title": "Nvidia Eyes 1,000 After AI Conference, Analyst Views; Is Nvidia A Buy?",
+        "news url": "https://finance.yahoo.com/m/dc591aa5-8656-399f-a2b0-90fb4c8c329e/nvidia-eyes-1%2C000-after-ai.html",
+        "skor_sentiment": 0.4055555555555555,
+        "label_sentiment": "Positif"
+    },
+    {
+        "news title": "Magnificent Seven Stocks To Buy And Watch: Nvidia Stock Rallies Near Record Highs",
+        "news url": "https://finance.yahoo.com/m/4205eaa9-f620-3a0b-a81a-0e82c7c9fd0b/magnificent-seven-stocks-to.html",
+        "skor_sentiment": -0.020454545454545454,
+        "label_sentiment": "Netral"
+    },
+    {
+        "news title": "The AI Stock Lapping The Field In 2024 \u2014 It's Not Nvidia",
+        "news url": "https://finance.yahoo.com/m/84f9a985-1c18-3aec-8940-2992f3df9250/the-ai-stock-lapping-the.html",
+        "skor_sentiment": 0.24,
+        "label_sentiment": "Agak Positif"
+    },
+    {
+        "news title": "Like the \"Magnificent Seven\" Stocks? You'll Love This Vanguard ETF.",
+        "news url": "https://finance.yahoo.com/m/148e5953-4515-300d-b0c8-736c615d77fa/like-the-%22magnificent-seven%22.html",
+        "skor_sentiment": 0.2622815456148791,
+        "label_sentiment": "Agak Positif"
+    },
+    {
+        "news title": "11 Reasons Why Nvidia's Artificial Intelligence (AI) Solutions Keep Getting Better",
+        "news url": "https://finance.yahoo.com/m/72926268-6772-3b6c-be1f-d84692aaf855/11-reasons-why-nvidia%27s.html",
+        "skor_sentiment": 0.34110094451003536,
+        "label_sentiment": "Positif"
+    },
+    {
+        "news title": "Nvidia Has a Secret Weapon to Keep Growing Long Into the Future",
+        "news url": "https://finance.yahoo.com/m/cc99c582-04fa-3d85-a20d-d5799c68b6f1/nvidia-has-a-secret-weapon-to.html",
+        "skor_sentiment": 0.12805101148851147,
+        "label_sentiment": "Agak Positif"
+    },
+    {
+        "news title": "A Once-in-a-Generation Investment Opportunity: 1 Artificial Intelligence (AI) Stock Partnered With Nvidia and Is Benefiting From the AI Boom",
+        "news url": "https://finance.yahoo.com/m/b41e2a4f-638d-3e0c-880f-e46cab805668/a-once-in-a-generation.html",
+        "skor_sentiment": 0.33353432282003703,
+        "label_sentiment": "Positif"
+    }
+]
