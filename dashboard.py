@@ -70,9 +70,9 @@ def get_company_name(symbol):
 
     return company_name
 
-company_name = get_company_name(stock_token)
+company_name = get_company_name(stock)
 
-first_trading_date = get_first_trading_date(stock_token)
+first_trading_date = get_first_trading_date(stock)
 
 def plot_stock_data(stock_symbol):
     # Fetch stock data
