@@ -49,7 +49,7 @@ with st.sidebar:
 tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Sentiment Analysis"])
 
 with tabs1:
-
+    st,header("Company Description and Analysis")
     corpName = stock.info['longName']
     website = stock.info['website']
     industryType = stock.info['industry']
@@ -63,8 +63,7 @@ with tabs1:
     recommendationScore = stock.info['recommendationMean']
     recommendationKey = stock.info['recommendationKey']
 
-    markdown_text = f"""
-    # Company Description and Analysis
+    markdown_text_left = f"""
     ### Company Name
     {corpName}
 
@@ -79,8 +78,20 @@ with tabs1:
 
     ### Target Low Price
     ${targetLow}
-
-
     """
 
+    markdown_text_right = f"""
+    ### Recommendation Score
+    {recommendationScore}
+
+    ### Recommendation Key
+    {recommendationKey}
+
+    ### Company Type
+    {industryType}
+    """
+    left_column, right_column = st.columns(2)
+
+    with left_column:
+        st.markdown(markdown_text)
     st.markdown(markdown_text)
