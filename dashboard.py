@@ -49,6 +49,7 @@ with st.sidebar:
 tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Sentiment Analysis"])
 
 with tabs1:
+
     corpName = stock.info['longName']
     website = stock.info['website']
     industryType = stock.info['industry']
@@ -61,3 +62,19 @@ with tabs1:
     targetMedian = stock.info['targetMedianPrice']
     recommendationScore = stock.info['recommendationMean']
     recommendationKey = stock.info['recommendationKey']
+
+    st.header("Company Description and Analysis")
+    
+    st.write(f"**Company Name:** {corpName}")
+    st.write(f"**Website:** {website}")
+    st.write(f"**Industry Type:** {industryType}")
+    st.write(f"**Industry Sector:** {industrySector}")
+    st.write(f"**Business Summary:** {businessSummary}")
+    st.write(f"**Current Price:** {currentPrice}")
+    st.write(f"**Target High Price:** {targetHigh}")
+    st.write(f"**Target Low Price:** {targetLow}")
+    st.write(f"**Target Mean Price:** {targetMean}")
+    st.write(f"**Target Median Price:** {targetMedian}")
+    st.write(f"**Recommendation Score:** {recommendationScore}")
+    st.write(f"**Recommendation Key:** {recommendationKey}")
+
