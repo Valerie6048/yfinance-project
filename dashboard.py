@@ -93,5 +93,7 @@ with tabs1:
     left_column, right_column = st.columns(2)
 
     with left_column:
-        st.markdown(markdown_text)
-    st.markdown(markdown_text)
+        st.markdown(markdown_text_left)
+
+    with right_column:
+        st.markdown(markdown_text_right)
