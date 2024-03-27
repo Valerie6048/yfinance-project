@@ -65,31 +65,22 @@ with tabs1:
 
     markdown_text = f"""
     # Company Description and Analysis
-    ## Company Name
+    ### Company Name
     {corpName}
 
-    ## Current Price
+    ### Website
+    {website}
+
+    ### Current Price
     ${currentPrice}
 
-    ## Target Price
+    ### Target High Price
     ${targetHigh}
+
+    ### Target Low Price
+    ${targetLow}
+
+
     """
 
     st.markdown(markdown_text)
-
-    '''
-    st.header("")
-
-    st.write(f"**Company Name:** {corpName}")
-    st.write(f"**Website:** {website}")
-    st.write(f"**Industry Type:** {industryType}")
-    st.write(f"**Industry Sector:** {industrySector}")
-    st.write(f"**Business Summary:** {businessSummary}")
-    st.write(f"**Current Price:** {currentPrice}")
-    st.write(f"**Target High Price:** {targetHigh}")
-    st.write(f"**Target Low Price:** {targetLow}")
-    st.write(f"**Target Mean Price:** {targetMean}")
-    st.write(f"**Target Median Price:** {targetMedian}")
-    st.write(f"**Recommendation Score:** {recommendationScore}")
-    st.write(f"**Recommendation Key:** {recommendationKey}")
-'''
