@@ -63,7 +63,7 @@ with tabs1:
     recommendationScore = stock.info['recommendationMean']
     recommendationKey = stock.info['recommendationKey']
 
-    """
+    markdown_text = """
     # Company Description and Analysis
     ## Company Name
     {corpName}
@@ -74,6 +74,8 @@ with tabs1:
     ## Target Price
     ${targetHigh}
     """
+
+    st.markdown(markdown_text)
 
     '''
     st.header("")
