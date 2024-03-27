@@ -197,5 +197,5 @@ with tabs1:
 with tabs2:
     st.header("NJAY")
 
-    fig = plot_stock_data(stock)
+    fig = plot_stock_data(stockToken)
     st.plotly_chart(fig)
