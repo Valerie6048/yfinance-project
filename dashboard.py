@@ -32,7 +32,7 @@ icon("📈")
 In this Projec I want to make an Analysis, Visualization, Prediction, and Sentiment Analysis of stock market data using several library like plotly, statsmodels, pandas, etc.
 """
 stockToken = st.text_input('Insert the Stock Token', 'NVDA')
-stock = yf.Ticker(stock_token)
+stock = yf.Ticker(stockToken)
 
 with st.sidebar:
     st.title('Biodata')
