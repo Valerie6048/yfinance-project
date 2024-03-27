@@ -49,7 +49,7 @@ with st.sidebar:
 tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Sentiment Analysis"])
 
 with tabs1:
-    st,header("Company Description and Analysis")
+    st.header("Company Description and Analysis")
     corpName = stock.info['longName']
     website = stock.info['website']
     industryType = stock.info['industry']
