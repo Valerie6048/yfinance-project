@@ -66,15 +66,15 @@ with tabs1:
     """
     # Company Description and Analysis
     ## Company Name
-    {company_name}
+    {corpName}
 
     ## Current Price
-    ${current_price}
+    ${currentPrice}
 
     ## Target Price
-    ${target_price}
+    ${targetHigh}
     """
-    
+
     '''
     st.header("")
 
