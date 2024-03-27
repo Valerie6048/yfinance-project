@@ -63,8 +63,21 @@ with tabs1:
     recommendationScore = stock.info['recommendationMean']
     recommendationKey = stock.info['recommendationKey']
 
-    st.header("Company Description and Analysis")
+    """
+    # Company Description and Analysis
+    ## Company Name
+    {company_name}
+
+    ## Current Price
+    ${current_price}
+
+    ## Target Price
+    ${target_price}
+    """
     
+    '''
+    st.header("")
+
     st.write(f"**Company Name:** {corpName}")
     st.write(f"**Website:** {website}")
     st.write(f"**Industry Type:** {industryType}")
@@ -77,4 +90,4 @@ with tabs1:
     st.write(f"**Target Median Price:** {targetMedian}")
     st.write(f"**Recommendation Score:** {recommendationScore}")
     st.write(f"**Recommendation Key:** {recommendationKey}")
-
+'''
