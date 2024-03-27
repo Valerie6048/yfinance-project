@@ -63,7 +63,7 @@ with tabs1:
     recommendationScore = stock.info['recommendationMean']
     recommendationKey = stock.info['recommendationKey']
 
-    markdown_text = """
+    markdown_text = f"""
     # Company Description and Analysis
     ## Company Name
     {corpName}
