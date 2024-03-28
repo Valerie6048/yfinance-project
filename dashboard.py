@@ -138,8 +138,8 @@ with tabs1:
 with tabs2:
     st.header("NJAY")
 
-    company_name = get_company_name(stock)
-    first_trading_date = get_first_trading_date(stock)
+    company_name = get_company_name(stockToken)
+    first_trading_date = get_first_trading_date(stockToken)
 
     end_date = pd.Timestamp.today(tz='America/New_York').ceil('D')
     start_date = first_trading_date
