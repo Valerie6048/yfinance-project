@@ -228,4 +228,43 @@ with tabs2:
     st.plotly_chart(fig)
 
 
+    data = stock.history(period='1Y')
+
+    # Proses data menjadi format yang sesuai untuk ARIMA
+    time_series = data['Close']
+
+    # Lakukan analisis ARIMA
+    arima_model = ARIMA(time_series, order=(5,1,0))  # Menggunakan model ARIMA(5,1,0)
+    arima_results = arima_model.fit()
+
+    # Tentukan jumlah langkah prediksi
+    forecast_steps = 30
+
+    # Buat indeks untuk prediksi dengan menambahkan langkah-langkah ke indeks terakhir dari data historis
+    forecast_index = pd.date_range(start=data.index[-1], periods=forecast_steps + 1, closed='right')
+
+    # Prediksi menggunakan model ARIMA
+    forecast = arima_results.forecast(steps=forecast_steps, index=forecast_index)
+
+    # Plot hasil prediksi menggunakan Plotly
+    fig = go.Figure()
+
+    # Tambahkan data historis
+    fig.add_trace(go.Scatter(x=time_series.index, y=time_series.values, mode='lines', name='Historical Data'))
+
+    # Tambahkan hasil prediksi
+    fig.add_trace(go.Scatter(x=forecast_index, y=forecast, mode='lines', name='Forecast'))
+
+    # Konfigurasi layout
+    fig.update_layout(
+        title='ARIMA Forecast for AAPL Stock',
+        xaxis_title='Date',
+        yaxis_title='Price',
+        width=900,
+        height=500
+    )
+    st.plotly_chart(fig)
+
+
+
 
