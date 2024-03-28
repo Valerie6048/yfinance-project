@@ -136,7 +136,8 @@ with tabs1:
         st.markdown(markdown_text_right)
 
 with tabs2:
-    st.header("NJAY")
+    st.header("Stock Market Chart")
+    st.subheader("Chart")
 
     company_name = get_company_name(stockToken)
     first_trading_date = get_first_trading_date(stockToken)
@@ -190,7 +191,6 @@ with tabs2:
     )
     st.plotly_chart(fig)
 
-
     end_date = pd.Timestamp.today(tz='America/New_York').ceil('D')
     start_date = end_date - pd.Timedelta(7,'D') # Get the last 4 days, in case of holidays/weekend
     data = stock.history(start=start_date, end=end_date, interval='15m').reset_index()
@@ -204,6 +204,8 @@ with tabs2:
         low = data.Low,
         close = data.Close
     ))
+
+    st.subheader("Daily Candle Chart")
 
     fig.update_layout(
         title=company_name,
@@ -226,42 +228,6 @@ with tabs2:
         )),
     )
     st.plotly_chart(fig)
-
-    if not data.empty:
-        # Process data to get time series
-        time_series = data['Close']
-
-        # Perform ARIMA analysis
-        arima_model = ARIMA(time_series, order=(5,1,0))  # ARIMA(5,1,0) model
-        arima_results = arima_model.fit()
-
-        # Determine number of forecast steps
-        forecast_steps = 30
-
-        # Generate forecast index
-        forecast_index = pd.date_range(start=data.index[-1], periods=forecast_steps + 1, closed='right')
-
-        # Make predictions using ARIMA model
-        forecast = arima_results.forecast(steps=forecast_steps, index=forecast_index)
-
-        # Plot historical data and forecast
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=time_series.index, y=time_series.values, mode='lines', name='Historical Data'))
-        fig.add_trace(go.Scatter(x=forecast_index, y=forecast, mode='lines', name='Forecast'))
-
-        # Configure layout
-        fig.update_layout(
-            title=f'ARIMA Forecast for {stock_symbol} Stock',
-            xaxis_title='Date',
-            yaxis_title='Price',
-            width=900,
-            height=500
-        )
-
-        # Display plot in Streamlit
-        st.plotly_chart(fig)
-    else:
-        st.error("Failed to fetch stock data. Please check the stock symbol and try again.")
 
 
 
