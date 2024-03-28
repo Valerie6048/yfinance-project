@@ -158,7 +158,7 @@ with tabs2:
         title=company_name,
         title_x=0.5,
         autosize=False,
-        width=900,
+        width=700,
         height=500,
         xaxis=dict(rangeselector=dict(
             buttons=list([
