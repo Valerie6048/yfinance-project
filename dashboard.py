@@ -190,3 +190,42 @@ with tabs2:
     )
     st.plotly_chart(fig)
 
+
+    end_date = pd.Timestamp.today(tz='America/New_York').ceil('D')
+    start_date = end_date - pd.Timedelta(7,'D') # Get the last 4 days, in case of holidays/weekend
+    data = stock.history(start=start_date, end=end_date, interval='15m').reset_index()
+    data = data.rename(columns=dict(Datetime='Date'))
+    data = data.loc[data.Date.dt.date == data.Date.dt.date.max()] # Get only the last day's data
+
+    fig = go.Figure(data=go.Candlestick(
+        x = data.Date,
+        open = data.Open,
+        high = data.High,
+        low = data.Low,
+        close = data.Close
+    ))
+
+    fig.update_layout(
+        title=company_name,
+        title_x=0.5,
+        autosize=False,
+        width=800,
+        height=600,
+        xaxis= dict(rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                    label="1H",
+                    step="hour",
+                    stepmode="backward"),
+                dict(count=3,
+                    label="3H",
+                    step="hour",
+                    stepmode="backward"),
+                dict(label='1D',step="all")
+            ])
+        )),
+    )
+    st.plotly_chart(fig)
+
+
+
