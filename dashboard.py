@@ -138,11 +138,12 @@ with tabs1:
 with tabs2:
     st.header("NJAY")
 
-    company_name = stock.info['longName']
-    first_trading_date = stock.info['firstTradeDate']
+    company_name = get_company_name(stock)
+    first_trading_date = get_first_trading_date(stock)
+
     end_date = pd.Timestamp.today(tz='America/New_York').ceil('D')
     start_date = first_trading_date
-    data = stock.history(start=start_date, end=end_date, interval='1d').reset_index()
+    data = stock.history(start=start_date,end=end_date, interval='1d').reset_index()
 
     years_difference = (end_date - start_date).days / 365
 
