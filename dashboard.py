@@ -70,10 +70,6 @@ def get_company_name(symbol):
 
     return company_name
 
-company_name = get_company_name(stockToken)
-
-first_trading_date = get_first_trading_date(stockToken)
-
 
 with st.sidebar:
     st.title('Biodata')
@@ -142,45 +138,54 @@ with tabs1:
 with tabs2:
     st.header("NJAY")
 
+    company_name = stock.info['longName']
+    first_trading_date = stock.info['firstTradeDate']
+    end_date = pd.Timestamp.today(tz='America/New_York').ceil('D')
+    start_date = first_trading_date
+    data = stock.history(start=start_date, end=end_date, interval='1d').reset_index()
+
+    years_difference = (end_date - start_date).days / 365
+
     fig = go.Figure(data=go.Scatter(
-    x=data['Date'],
-    y=data['Close'],
-    mode='lines',
-    name='Close Price'
-))
-fig.update_layout(
-    title=company_name,
-    title_x=0.5,
-    autosize=False,
-    width=900,
-    height=500,
-    xaxis=dict(rangeselector=dict(
-        buttons=list([
-            dict(count=30,
-                    label="30D",
-                    step="day",
-                    stepmode="backward"),
-            dict(count=6,
-                    label="6M",
-                    step="month",
-                    stepmode="backward"),
-            dict(count=1,
-                    label="YTD",
-                    step="year",
-                    stepmode="todate"),
-            dict(count=1,
-                    label="1Y",
-                    step="year",
-                    stepmode="backward"),
-            dict(count=3,
-                    label="3Y",
-                    step="year",
-                    stepmode="backward"),
-            dict(count=years_difference,
-                    label="MAX",
-                    step="year",
-                    stepmode="backward")
-        ])
-    )),
-)
+        x=data['Date'],
+        y=data['Close'],
+        mode='lines',
+        name='Close Price'
+    ))
+    fig.update_layout(
+
+        title=company_name,
+        title_x=0.5,
+        autosize=False,
+        width=900,
+        height=500,
+        xaxis=dict(rangeselector=dict(
+            buttons=list([
+                dict(count=30,
+                        label="30D",
+                        step="day",
+                        stepmode="backward"),
+                dict(count=6,
+                        label="6M",
+                        step="month",
+                        stepmode="backward"),
+                dict(count=1,
+                        label="YTD",
+                        step="year",
+                        stepmode="todate"),
+                dict(count=1,
+                        label="1Y",
+                        step="year",
+                        stepmode="backward"),
+                dict(count=3,
+                        label="3Y",
+                        step="year",
+                        stepmode="backward"),
+                dict(count=years_difference,
+                        label="MAX",
+                        step="year",
+                        stepmode="backward")
+            ])
+        )),
+    )
 
