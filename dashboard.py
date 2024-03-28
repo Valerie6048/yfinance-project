@@ -227,43 +227,41 @@ with tabs2:
     )
     st.plotly_chart(fig)
 
+    if not data.empty:
+        # Process data to get time series
+        time_series = data['Close']
 
-    data = stock.history(period='1Y')
+        # Perform ARIMA analysis
+        arima_model = ARIMA(time_series, order=(5,1,0))  # ARIMA(5,1,0) model
+        arima_results = arima_model.fit()
 
-    # Proses data menjadi format yang sesuai untuk ARIMA
-    time_series = data['Close']
+        # Determine number of forecast steps
+        forecast_steps = 30
 
-    # Lakukan analisis ARIMA
-    arima_model = ARIMA(time_series, order=(5,1,0))  # Menggunakan model ARIMA(5,1,0)
-    arima_results = arima_model.fit()
+        # Generate forecast index
+        forecast_index = pd.date_range(start=data.index[-1], periods=forecast_steps + 1, closed='right')
 
-    # Tentukan jumlah langkah prediksi
-    forecast_steps = 30
+        # Make predictions using ARIMA model
+        forecast = arima_results.forecast(steps=forecast_steps, index=forecast_index)
 
-    # Buat indeks untuk prediksi dengan menambahkan langkah-langkah ke indeks terakhir dari data historis
-    forecast_index = pd.date_range(start=data.index[-1], periods=forecast_steps + 1, closed='right')
+        # Plot historical data and forecast
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=time_series.index, y=time_series.values, mode='lines', name='Historical Data'))
+        fig.add_trace(go.Scatter(x=forecast_index, y=forecast, mode='lines', name='Forecast'))
 
-    # Prediksi menggunakan model ARIMA
-    forecast = arima_results.forecast(steps=forecast_steps, index=forecast_index)
+        # Configure layout
+        fig.update_layout(
+            title=f'ARIMA Forecast for {stock_symbol} Stock',
+            xaxis_title='Date',
+            yaxis_title='Price',
+            width=900,
+            height=500
+        )
 
-    # Plot hasil prediksi menggunakan Plotly
-    fig = go.Figure()
-
-    # Tambahkan data historis
-    fig.add_trace(go.Scatter(x=time_series.index, y=time_series.values, mode='lines', name='Historical Data'))
-
-    # Tambahkan hasil prediksi
-    fig.add_trace(go.Scatter(x=forecast_index, y=forecast, mode='lines', name='Forecast'))
-
-    # Konfigurasi layout
-    fig.update_layout(
-        title='ARIMA Forecast for AAPL Stock',
-        xaxis_title='Date',
-        yaxis_title='Price',
-        width=900,
-        height=500
-    )
-    st.plotly_chart(fig)
+        # Display plot in Streamlit
+        st.plotly_chart(fig)
+    else:
+        st.error("Failed to fetch stock data. Please check the stock symbol and try again.")
 
 
 
