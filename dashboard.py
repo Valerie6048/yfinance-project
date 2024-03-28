@@ -154,11 +154,10 @@ with tabs2:
         name='Close Price'
     ))
     fig.update_layout(
-
         title=company_name,
         title_x=0.5,
         autosize=False,
-        width=700,
+        width=900,
         height=500,
         xaxis=dict(rangeselector=dict(
             buttons=list([
