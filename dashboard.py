@@ -274,6 +274,7 @@ with tabs3:
 
     df = pd.read_json("sentiment_analysis_results.json")
 
+    st.header("Sentiment Analysis")
     st.write(df)
 
 
