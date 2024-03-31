@@ -259,22 +259,21 @@ with tabs2:
 
 with tabs3:
     news = stock.news
-    
+
     urls = [item['link'] for item in news]
     titles = [item['title'] for item in news]
 
     articles_info = [{'news title': title, 'news url': url} for title, url in zip(titles, urls)]
 
+    data=[]
+
     for article in articles_info:
         sentiment_score, sentiment_label, text = analyze_sentiment(article['news url'])
         article['skor_sentiment'] = sentiment_score
         article['label_sentiment'] = sentiment_label
-
-    # Menyimpan informasi artikel dalam format JSON
-    with open('sentiment_analysis_results.json', 'w') as file:
-        json.dump(articles_info, file, indent=4)
-
-    df = pd.read_json("sentiment_analysis_results.json")
+        data.append(article)
+    
+    df = pd.DataFrame(data)
 
     st.header("Sentiment Analysis")
     st.write(df)
