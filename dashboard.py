@@ -34,6 +34,8 @@ In this Projec I want to make an Analysis, Visualization, Prediction, and Sentim
 stockToken = st.text_input('Insert the Stock Token', 'NVDA')
 stock = yf.Ticker(stockToken)
 
+news = stock.news
+
 def get_first_trading_date(symbol):
     # Membuat objek ticker
     ticker = yf.Ticker(symbol)
@@ -258,7 +260,6 @@ with tabs2:
     st.plotly_chart(fig)
 
 with tabs3:
-    news = stock.news
 
     urls = [item['link'] for item in news]
     titles = [item['title'] for item in news]
