@@ -263,6 +263,8 @@ with tabs3:
     urls = [item['link'] for item in news]
     titles = [item['title'] for item in news]
 
+    articles_info = [{'news title': title, 'news url': url} for title, url in zip(titles, urls)]
+
     for article in articles_info:
         sentiment_score, sentiment_label, text = analyze_sentiment(article['news url'])
         article['skor_sentiment'] = sentiment_score
