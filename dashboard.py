@@ -79,7 +79,7 @@ with st.sidebar:
     """
     st.caption('@Valerie6048')
 
-tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Sentiment Analysis"])
+tabs1, tabs2 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction"])
 
 with tabs1:
     st.header("Company Description and Analysis")
