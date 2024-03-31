@@ -10,9 +10,6 @@ import plotly.graph_objects as go
 
 import yfinance as yf
 
-from newspaper import Article
-from textblob import TextBlob
-
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.arima.model import ARIMA
 
@@ -69,35 +66,6 @@ def get_company_name(symbol):
     company_name = company_info['longName']
 
     return company_name
-
-def analyze_sentiment(url):
-    # Mengambil teks artikel dari URL
-    article = Article(url)
-    article.download()
-    article.parse()
-    text = article.text
-
-    # Menganalisis sentimen menggunakan TextBlob
-    blob = TextBlob(text)
-    sentiment_score = blob.sentiment.polarity
-
-    # Menentukan label sentimen
-    if sentiment_score >= 0.6:
-        sentiment_label = "Sangat Positif"
-    elif 0.3 <= sentiment_score < 0.6:
-        sentiment_label = "Positif"
-    elif 0.1 <= sentiment_score < 0.3:
-        sentiment_label = "Agak Positif"
-    elif -0.1 <= sentiment_score < 0.1:
-        sentiment_label = "Netral"
-    elif -0.3 <= sentiment_score < -0.1:
-        sentiment_label = "Agak Negatif"
-    elif -0.6 <= sentiment_score < -0.3:
-        sentiment_label = "Negatif"
-    else:
-        sentiment_label = "Sangat Negatif"
-
-    return sentiment_score, sentiment_label,text
 
 with st.sidebar:
     st.title('Biodata')
@@ -256,27 +224,5 @@ with tabs2:
         )),
     )
     st.plotly_chart(fig)
-
-with tabs3:
-
-    news = stock.news
-
-    urls = [item['link'] for item in news]
-    titles = [item['title'] for item in news]
-
-    articles_info = [{'news title': title, 'news url': url} for title, url in zip(titles, urls)]
-
-    data=[]
-
-    for article in articles_info:
-        sentiment_score, sentiment_label, text = analyze_sentiment(article['news url'])
-        article['skor_sentiment'] = sentiment_score
-        article['label_sentiment'] = sentiment_label
-        data.append(article)
-    
-    df = pd.DataFrame(data)
-
-    st.header("Sentiment Analysis")
-    st.write(df)
 
 
