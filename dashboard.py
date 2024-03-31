@@ -259,6 +259,8 @@ with tabs2:
 
 with tabs3:
 
+    news = stock.news
+
     urls = [item['link'] for item in news]
     titles = [item['title'] for item in news]
 
