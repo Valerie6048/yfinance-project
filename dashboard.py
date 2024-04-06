@@ -100,6 +100,12 @@ with tabs1:
     ### Company Name
     {corpName}
 
+    ### Company Type
+    {industryType}
+
+    ### Company Sector
+    {industrySector}
+    
     ### Website
     {website}
 
@@ -119,9 +125,6 @@ with tabs1:
 
     ### Recommendation Key
     {recommendationKey}
-
-    ### Company Type
-    {industryType}
     """
     left_column, right_column = st.columns(2)
 
@@ -130,6 +133,13 @@ with tabs1:
 
     with right_column:
         st.markdown(markdown_text_right)
+    
+    markdown_text_center = f"""
+    ### Company Detail
+    {businessSummary}
+    """
+
+    st.markdown(markdown_text_center)
 
 with tabs2:
     st.header("Stock Market Chart")
