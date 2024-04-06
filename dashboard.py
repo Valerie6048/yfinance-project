@@ -108,6 +108,14 @@ with tabs1:
     
     ### Website
     {website}
+    """
+
+    markdown_text_right = f"""
+    ### Recommendation Score
+    {recommendationScore}
+
+    ### Recommendation Key
+    {recommendationKey}
 
     ### Current Price
     ${currentPrice}
@@ -117,14 +125,6 @@ with tabs1:
 
     ### Target Low Price
     ${targetLow}
-    """
-
-    markdown_text_right = f"""
-    ### Recommendation Score
-    {recommendationScore}
-
-    ### Recommendation Key
-    {recommendationKey}
     """
     left_column, right_column = st.columns(2)
 
