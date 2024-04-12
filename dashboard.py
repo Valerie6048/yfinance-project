@@ -3,8 +3,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 
 import pandas as pd
-import pandas as ta
-import json
+import pandas_ta as ta
 import numpy as np
 
 import plotly.graph_objects as go
