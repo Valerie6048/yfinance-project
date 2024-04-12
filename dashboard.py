@@ -81,7 +81,7 @@ with st.sidebar:
     """
     st.caption('@Valerie6048')
 
-tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis"])
+tabs1, tabs2, tabs3, tabs4 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis", "Expert Analysis by Gemini AI Pro"])
 
 with tabs1:
     st.header("Company Description and Analysis")
@@ -346,6 +346,8 @@ with tabs3:
     plt.tight_layout()
     st.pyplot(fig)
 
+with tabs4:
+    
 
 
 st.caption("@Valerie6048")
