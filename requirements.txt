@@ -7,3 +7,4 @@ yfinance
 newspaper3k
 textblob
 statsmodels==0.13.2
+pandas_ta

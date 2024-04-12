@@ -3,10 +3,13 @@ import streamlit as st
 from datetime import datetime
 
 import pandas as pd
+import pandas as ta
 import json
 import numpy as np
 
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 import yfinance as yf
 
@@ -79,7 +82,7 @@ with st.sidebar:
     """
     st.caption('@Valerie6048')
 
-tabs1, tabs2 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction"])
+tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis"])
 
 with tabs1:
     st.header("Company Description and Analysis")
@@ -235,6 +238,115 @@ with tabs2:
     )
     st.plotly_chart(fig)
 
+with tabs3:
+    end_date = datetime.today()
+    start_date = end_date - timedelta(days=120)  # 4 months before today
+    stock_data = yf.download(symbol, start=start_date, end=end_date)
+
+    # Calculate technical indicators using pandas-ta
+    stock_data.ta.macd(append=True)
+    stock_data.ta.rsi(append=True)
+    stock_data.ta.bbands(append=True)
+    stock_data.ta.obv(append=True)
+
+    # Calculate additional technical indicators
+    stock_data.ta.sma(length=20, append=True)
+    stock_data.ta.ema(length=50, append=True)
+    stock_data.ta.stoch(append=True)
+    stock_data.ta.adx(append=True)
+
+    # Calculate other indicators
+    stock_data.ta.willr(append=True)
+    stock_data.ta.cmf(append=True)
+    stock_data.ta.psar(append=True)
+
+    #convert OBV to million
+    stock_data['OBV_in_million'] =  stock_data['OBV']/1e7
+    stock_data['MACD_histogram_12_26_9'] =  stock_data['MACDh_12_26_9'] # not to confuse chatGTP
+
+    # Summarize technical indicators for the last day
+    last_day_summary = stock_data.iloc[-1][['Adj Close',
+        'MACD_12_26_9','MACD_histogram_12_26_9', 'RSI_14', 'BBL_5_2.0', 'BBM_5_2.0', 'BBU_5_2.0','SMA_20', 'EMA_50','OBV_in_million', 'STOCHk_14_3_3',
+        'STOCHd_14_3_3', 'ADX_14',  'WILLR_14', 'CMF_20',
+        'PSARl_0.02_0.2', 'PSARs_0.02_0.2'
+    ]]
+
+    # Plot the technical indicators
+    fig, axs = plt.subplots(3, 3, figsize=(14, 8))
+
+    # Price Trend Chart
+    axs[0, 0].plot(stock_data.index, stock_data['Adj Close'], label='Adj Close', color='blue')
+    axs[0, 0].plot(stock_data.index, stock_data['EMA_50'], label='EMA 50', color='green')
+    axs[0, 0].plot(stock_data.index, stock_data['SMA_20'], label='SMA_20', color='orange')
+    axs[0, 0].set_title("Price Trend")
+    axs[0, 0].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[0, 0].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+    axs[0, 0].legend()
+
+    # On-Balance Volume Chart
+    axs[0, 1].plot(stock_data['OBV'], label='On-Balance Volume')
+    axs[0, 1].set_title('On-Balance Volume (OBV) Indicator')
+    axs[0, 1].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[0, 1].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+    axs[0, 1].legend()
+
+    # MACD Plot
+    axs[0, 2].plot(stock_data['MACD_12_26_9'], label='MACD')
+    axs[0, 2].plot(stock_data['MACDh_12_26_9'], label='MACD Histogram')
+    axs[0, 2].set_title('MACD Indicator')
+    axs[0, 2].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[0, 2].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+    axs[0, 2].legend()
+
+    # RSI Plot
+    axs[1, 0].plot(stock_data['RSI_14'], label='RSI')
+    axs[1, 0].axhline(y=70, color='r', linestyle='--', label='Overbought (70)')
+    axs[1, 0].axhline(y=30, color='g', linestyle='--', label='Oversold (30)')
+    axs[1, 0].legend()
+    axs[1, 0].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[1, 0].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+    axs[1, 0].set_title('RSI Indicator')
+
+    # Bollinger Bands Plot
+    axs[1, 1].plot(stock_data.index, stock_data['BBU_5_2.0'], label='Upper BB')
+    axs[1, 1].plot(stock_data.index, stock_data['BBM_5_2.0'], label='Middle BB')
+    axs[1, 1].plot(stock_data.index, stock_data['BBL_5_2.0'], label='Lower BB')
+    axs[1, 1].plot(stock_data.index, stock_data['Adj Close'], label='Adj Close', color='brown')
+    axs[1, 1].set_title("Bollinger Bands")
+    axs[1, 1].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[1, 1].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+    axs[1, 1].legend()
+
+    # Stochastic Oscillator Plot
+    axs[1, 2].plot(stock_data.index, stock_data['STOCHk_14_3_3'], label='Stoch %K')
+    axs[1, 2].plot(stock_data.index, stock_data['STOCHd_14_3_3'], label='Stoch %D')
+    axs[1, 2].set_title("Stochastic Oscillator")
+    axs[1, 2].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[1, 2].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+    axs[1, 2].legend()
+
+    # Williams %R Plot
+    axs[2, 0].plot(stock_data.index, stock_data['WILLR_14'])
+    axs[2, 0].set_title("Williams %R")
+    axs[2, 0].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[2, 0].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+
+    # ADX Plot
+    axs[2, 1].plot(stock_data.index, stock_data['ADX_14'])
+    axs[2, 1].set_title("Average Directional Index (ADX)")
+    axs[2, 1].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[2, 1].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+
+    # CMF Plot
+    axs[2, 2].plot(stock_data.index, stock_data['CMF_20'])
+    axs[2, 2].set_title("Chaikin Money Flow (CMF)")
+    axs[2, 2].xaxis.set_major_formatter(mdates.DateFormatter('%b%d'))  # Format date as "Jun14"
+    axs[2, 2].tick_params(axis='x', rotation=45, labelsize=8)  # Adjust font size
+
+    # Show the plots
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
+
 st.caption("@Valerie6048")
-
-
