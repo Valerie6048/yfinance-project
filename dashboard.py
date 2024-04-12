@@ -241,7 +241,7 @@ with tabs2:
 with tabs3:
     end_date = datetime.today()
     start_date = end_date - timedelta(days=120)  # 4 months before today
-    stock_data = yf.download(symbol, start=start_date, end=end_date)
+    stock_data = yf.download(stockToken, start=start_date, end=end_date)
 
     # Calculate technical indicators using pandas-ta
     stock_data.ta.macd(append=True)
