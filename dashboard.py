@@ -368,6 +368,6 @@ with tabs4:
     genai.configure(api_key=GeminiKey)
     model = genai.GenerativeModel('gemini-pro')
     response = model.generate_content(sys_prompt)
-    st.write(response)
+    st.write(response.text)
 
 st.caption("@Valerie6048")
