@@ -285,7 +285,7 @@ with tabs3:
     given {} TA data as below on the last trading day, what will be the next few days possible stock price movement?
 
     Summary of Technical Indicators for the Last Day:
-    {}""".format(symbol,last_day_summary)
+    {}""".format(stockToken,last_day_summary)
 
     # Plot the technical indicators
     fig, axs = plt.subplots(3, 3, figsize=(14, 8))
