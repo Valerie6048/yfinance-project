@@ -102,6 +102,7 @@ with tabs1:
     targetMedian = stock.info.get('targetMedianPrice', 'N/A')
     recommendationScore = stock.info.get('recommendationMean', 'N/A')
     recommendationKey = stock.info.get('recommendationKey', 'N/A')
+    
 
     markdown_text_left = f"""
     ### Company Name
