@@ -81,7 +81,7 @@ with st.sidebar:
     LinkedIn: [Akhmad Nizar Zakaria](https://www.linkedin.com/in/akhmad-nizar-zakaria-8a692b229/)
 
     Discord ID: valerie6048
-    
+
 
     """
     st.caption('@Valerie6048')
@@ -90,18 +90,18 @@ tabs1, tabs2, tabs3, tabs4 = st.tabs(["Company Description and Analyisis", "Data
 
 with tabs1:
     st.header("Company Description and Analysis")
-    corpName = stock.info['shortName']
-    website = stock.info['website']
-    industryType = stock.info['industry']
-    industrySector = stock.info['sector']
-    businessSummary = stock.info['longBusinessSummary']
-    currentPrice = stock.info['currentPrice']
-    targetHigh = stock.info['targetHighPrice']
-    targetLow = stock.info['targetLowPrice']
-    targetMean = stock.info['targetMeanPrice']
-    targetMedian = stock.info['targetMedianPrice']
-    recommendationScore = stock.info['recommendationMean']
-    recommendationKey = stock.info['recommendationKey']
+    corpName = stock.info.get('shortName', 'N/A')
+    website = stock.info.get('website', 'N/A')
+    industryType = stock.info.get('industry', 'N/A')
+    industrySector = stock.info.get('sector', 'N/A')
+    businessSummary = stock.info.get('longBusinessSummary', 'N/A')
+    currentPrice = stock.info.get('currentPrice', 'N/A')
+    targetHigh = stock.info.get('targetHighPrice', 'N/A')
+    targetLow = stock.info.get('targetLowPrice', 'N/A')
+    targetMean = stock.info.get('targetMeanPrice', 'N/A')
+    targetMedian = stock.info.get('targetMedianPrice', 'N/A')
+    recommendationScore = stock.info.get('recommendationMean', 'N/A')
+    recommendationKey = stock.info.get('recommendationKey', 'N/A')
 
     markdown_text_left = f"""
     ### Company Name
