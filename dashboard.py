@@ -80,6 +80,8 @@ with st.sidebar:
     
     LinkedIn: [Akhmad Nizar Zakaria](https://www.linkedin.com/in/akhmad-nizar-zakaria-8a692b229/)
 
+    Discord ID: valerie6048
+
     """
     st.caption('@Valerie6048')
 
@@ -87,7 +89,7 @@ tabs1, tabs2, tabs3, tabs4 = st.tabs(["Company Description and Analyisis", "Data
 
 with tabs1:
     st.header("Company Description and Analysis")
-    corpName = stock.info['longName']
+    corpName = stock.info['shortName']
     website = stock.info['website']
     industryType = stock.info['industry']
     industrySector = stock.info['sector']
