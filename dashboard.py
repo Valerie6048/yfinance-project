@@ -74,15 +74,11 @@ def get_company_name(symbol):
 with st.sidebar:
     st.title('Biodata')
     """
-    Name: Akhmad Nizar Zakaria
+    Name: Nizar
     
     Github: [Valerie6048](https://github.com/Valerie6048)
-    
-    LinkedIn: [Akhmad Nizar Zakaria](https://www.linkedin.com/in/akhmad-nizar-zakaria-8a692b229/)
 
     Discord ID: valerie6048
-
-
     """
     st.caption('@Valerie6048')
 
