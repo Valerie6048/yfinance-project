@@ -7,6 +7,7 @@ import pandas_ta as ta
 import numpy as np
 
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
@@ -14,6 +15,9 @@ import yfinance as yf
 
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.arima.model import ARIMA
+
+from ta.trend import MACD
+from ta.momentum import StochasticOscillator
 
 import google.generativeai as genai
 
@@ -82,7 +86,7 @@ with st.sidebar:
     """
     st.caption('@Valerie6048')
 
-tabs1, tabs2, tabs3, tabs4 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis", "Expert Analysis by Gemini AI Pro"])
+tabs1, tabs2, tabs3, tabs4, tabs5 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis", "Expert Analysis by Gemini AI Pro", "Try TA with Plotly"])
 
 with tabs1:
     st.header("Company Description and Analysis")
@@ -369,5 +373,26 @@ with tabs4:
     model = genai.GenerativeModel('gemini-pro')
     response = model.generate_content(sys_prompt)
     st.write(response.text)
+
+with tabs5:
+    df = yf.download(tickers=stockToken,period='1d',interval='1m')
+
+    df['MA5'] = df['Close'].rolling(window=5).mean()
+    df['MA20'] = df['Close'].rolling(window=20).mean()
+
+    #macd
+    macd = MACD(close=df['Close'], 
+            window_slow=26,
+            window_fast=12, 
+            window_sign=9)
+
+    # stochastic
+    stoch = StochasticOscillator(high=df['High'],
+                                close=df['Close'],
+                                low=df['Low'],
+                                window=14, 
+                                smooth_window=3)
+    
+
 
 st.caption("@Valerie6048")
