@@ -263,7 +263,12 @@ with tabs3:
                                 window=14, 
                                 smooth_window=3)
     
+    viz = plotly.subplots.make_subplots(rows=4, cols=1, shared_xaxes=True,
+                    vertical_spacing=0.01, 
+                    row_heights=[0.5,0.1,0.2,0.2])
     
+    
+
 
     # Calculate technical indicators using pandas-ta
     stock_data.ta.macd(append=True)
