@@ -376,7 +376,7 @@ with tabs4:
     
 st.caption("@Valerie6048")
 
-/*
+ini_comment = """
     df = yf.download(tickers=stockToken,period='1d',interval='1m')
 
     df['MA5'] = df['Close'].rolling(window=5).mean()
@@ -483,4 +483,4 @@ st.caption("@Valerie6048")
         )
     )
     st.pyplot(viz)
-*/
+"""
