@@ -269,54 +269,54 @@ with tabs3:
                     vertical_spacing=0.01, 
                     row_heights=[0.5,0.1,0.2,0.2])
     
-    viz.add_trace(go.Candlestick(x=df.index,
-                open=df['Open'],
-                high=df['High'],
-                low=df['Low'],
-                close=df['Close'], name = 'market data'))
+    viz.add_trace(go.Candlestick(x=stock_data.index,
+                open=stock_data['Open'],
+                high=stock_data['High'],
+                low=stock_data['Low'],
+                close=stock_data['Close'], name = 'market data'))
     
-    viz.add_trace(go.Scatter(x=df.index, 
-                            y=df['MA5'], 
+    viz.add_trace(go.Scatter(x=stock_data.index, 
+                            y=stock_data['MA5'], 
                             opacity=0.7, 
                             line=dict(color='blue', width=2), 
                             name='MA 5'))
 
-    viz.add_trace(go.Scatter(x=df.index, 
-                            y=df['MA20'], 
+    viz.add_trace(go.Scatter(x=stock_data.index, 
+                            y=stock_data['MA20'], 
                             opacity=0.7, 
                             line=dict(color='orange', width=2), 
                             name='MA 20'))
 
     # Plot volume trace on 2nd row
     colors = ['green' if row['Open'] - row['Close'] >= 0 
-            else 'red' for index, row in df.iterrows()]
-    viz.add_trace(go.Bar(x=df.index, 
-                        y=df['Volume'],
+            else 'red' for index, row in stock_data.iterrows()]
+    viz.add_trace(go.Bar(x=stock_data.index, 
+                        y=stock_data['Volume'],
                         marker_color=colors
                         ), row=2, col=1)
 
     # Plot MACD trace on 3rd row
     colorsM = ['green' if val >= 0 
             else 'red' for val in macd.macd_diff()]
-    viz.add_trace(go.Bar(x=df.index, 
+    viz.add_trace(go.Bar(x=stock_data.index, 
                         y=macd.macd_diff(),
                         marker_color=colorsM
                         ), row=3, col=1)
-    viz.add_trace(go.Scatter(x=df.index,
+    viz.add_trace(go.Scatter(x=stock_data.index,
                             y=macd.macd(),
                             line=dict(color='black', width=2)
                             ), row=3, col=1)
-    viz.add_trace(go.Scatter(x=df.index,
+    viz.add_trace(go.Scatter(x=stock_data.index,
                             y=macd.macd_signal(),
                             line=dict(color='blue', width=1)
                             ), row=3, col=1)
 
     # Plot stochastics trace on 4th row
-    viz.add_trace(go.Scatter(x=df.index,
+    viz.add_trace(go.Scatter(x=stock_data.index,
                             y=stoch.stoch(),
                             line=dict(color='black', width=2)
                             ), row=4, col=1)
-    viz.add_trace(go.Scatter(x=df.index,
+    viz.add_trace(go.Scatter(x=stock_data.index,
                             y=stoch.stoch_signal(),
                             line=dict(color='blue', width=1)
                             ), row=4, col=1)
