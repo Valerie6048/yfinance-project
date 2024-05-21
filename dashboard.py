@@ -17,6 +17,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.arima.model import ARIMA
 
 from ta.trend import MACD
+
 from ta.momentum import StochasticOscillator
 
 import google.generativeai as genai
