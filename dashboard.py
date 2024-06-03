@@ -87,7 +87,7 @@ with st.sidebar:
     """
     st.caption('@Valerie6048')
 
-tabs1, tabs2, tabs3, tabs4 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis", "Expert Analysis by Gemini AI Pro"])
+tabs1, tabs2, tabs3 = st.tabs(["Company Description and Analyisis", "Data Visualiation and Prediction", "Technical Analysis"])
 
 with tabs1:
     st.header("Company Description and Analysis")
@@ -277,21 +277,6 @@ with tabs3:
         'PSARl_0.02_0.2', 'PSARs_0.02_0.2'
     ]]
 
-    sys_prompt = """
-    Assume the role as a leading Technical Analysis (TA) expert in the stock market, \
-    a modern counterpart to Charles Dow, John Bollinger, and Alan Andrews. \
-    Your mastery encompasses both stock fundamentals and intricate technical indicators. \
-    You possess the ability to decode complex market dynamics, \
-    providing clear insights and recommendations backed by a thorough understanding of interrelated factors. \
-    Your expertise extends to practical tools like the pandas_ta module, \
-    allowing you to navigate data intricacies with ease. \
-    As a TA authority, your role is to decipher market trends, make informed predictions, and offer valuable perspectives.
-
-    given {} TA data as below on the last trading day, what will be the next few days possible stock price movement?
-
-    Summary of Technical Indicators for the Last Day:
-    {}""".format(stockToken,last_day_summary)
-
     # Plot the technical indicators
     fig, axs = plt.subplots(3, 3, figsize=(14, 8))
 
@@ -367,13 +352,6 @@ with tabs3:
     # Show the plots
     plt.tight_layout()
     st.pyplot(fig)
-
-with tabs4:
-    GeminiKey = st.secrets["GEMINI_API"]
-    genai.configure(api_key=GeminiKey)
-    model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content(sys_prompt)
-    st.write(response.text)
     
 st.caption("@Valerie6048")
 
